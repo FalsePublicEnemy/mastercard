@@ -2,14 +2,14 @@ import pytest
 import json
 from fastapi.testclient import TestClient
 
-from main import app
+from app.main import app
 
 client = TestClient(app)
 
 def cleanup_on_teardown():
     # Add this function to flush db on every test and be
     # able to use same email twice
-    from main import database
+    from app.main import database
     database.clear()
 
 def test_healthcheck():
