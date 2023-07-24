@@ -90,6 +90,7 @@ async def add_account(request: AccountCreateValidator):
         description=request.description,
     )
     create_account(account)
+    logger.info('Account created', extra=account.__dict__)
     return {'result': account.__dict__}
 
 
@@ -109,5 +110,6 @@ async def delete_account(account_id: str):
     # We are checking account existance by reusing same function as in getting account
     account = get_account_by_id(account_id)
     account.delete_from_db()
+    logger.info('Account deleted', extra=account.__dict__)
     return {}
 
